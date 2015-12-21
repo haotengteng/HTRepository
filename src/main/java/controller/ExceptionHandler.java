@@ -1,0 +1,16 @@
+package controller;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+/**
+ * Created by htt on 2015/12/21.
+ */
+@ControllerAdvice
+public class ExceptionHandler {
+   @org.springframework.web.bind.annotation.ExceptionHandler(NullPointerException.class)
+   @ResponseBody
+    public String handlerExceptor(){
+       return "GET Exception!";
+   }
+}
