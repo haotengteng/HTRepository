@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @ControllerAdvice
 public class ExceptionHandler {
-   @org.springframework.web.bind.annotation.ExceptionHandler(NullPointerException.class)
+   @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
    @ResponseBody
-    public String handlerExceptor(){
-       return "GET Exception!";
+    public String handlerExceptor(Exception e){
+       return e.getMessage();
    }
 }
