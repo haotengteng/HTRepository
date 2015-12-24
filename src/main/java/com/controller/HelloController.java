@@ -30,5 +30,10 @@ public class HelloController {
         }
         throw new Exception("defult");
     }
+    @RequestMapping
+    @ResponseBody
+    public String index() throws Exception {
+        return "hello";
+    }
 
 }

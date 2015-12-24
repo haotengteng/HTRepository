@@ -1,9 +1,12 @@
 package com.model;
 
+import javax.persistence.Id;
+import java.io.Serializable;
+
 /**
  * Created by htt on 2015/12/23.
  */
-public class UserBaseDO {
+public class UserBaseDO implements Serializable {
     public String userId;
     public String userName;
     public String password;

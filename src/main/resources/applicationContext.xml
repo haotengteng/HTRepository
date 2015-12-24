@@ -10,27 +10,25 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
-    <context:component-scan base-package="com"/>
     <mvc:annotation-driven/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:component-scan base-package="com"/>
     <!--配置数据源 apache的连接池-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
          <property name="url" value="${url}"></property>
          <property name="driverClassName" value="${driver}"></property>
-         <property name="username" value="${username}"></property>
-         <property name="password" value="${password}"></property>
+         <property name="username" value="${mysql.user}"></property>
+         <property name="password" value="${mysql.password}"></property>
     </bean>
     <!--配置session工厂， mybatis的-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--<property name="configLocation" value="classpath:md-core-mybatis.xml" />-->
         <property name="dataSource" ref="dataSource"></property>
-        <property name="mapperLocations" value="classpath:com/dao/*.xml"></property>
     </bean>
+
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="dao" />
+        <property name="basePackage" value="com.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"></property>
-    </bean>
-    <tx:annotation-driven />
+
 </beans>

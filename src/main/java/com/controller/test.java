@@ -11,13 +11,13 @@ import java.sql.Statement;
  */
 public class test {
     public static Connection getConnection(){
-        String driver="com.mysql.jdbc.Driver";   //��ȡmysql���ݿ��������
-        String url="jdbc:mysql://localhost:3306/test"; //�������ݿ⣨kucun�����ݿ�����
-        String name="root";//����mysql���û���
-        String pwd="123456";//����mysql������
+        String driver="com.mysql.jdbc.Driver";
+        String url="jdbc:mysql://localhost:3306/test";
+        String name="root";
+        String pwd="123456";
         try{
             Class.forName(driver);
-            Connection conn=DriverManager.getConnection(url,name,pwd);//��ȡ���Ӷ���
+            Connection conn=DriverManager.getConnection(url,name,pwd);
             return conn;
         }catch(ClassNotFoundException e){
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class test {
         String sql = "select * from user_test";
         ResultSet rs = statement.executeQuery(sql);
         while(rs.next()) {
-            System.out.println(rs.getString("id")+"");
+            System.out.println(rs.getString("userName")+"");
         }
 
 
