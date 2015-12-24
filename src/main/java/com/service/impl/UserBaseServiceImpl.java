@@ -1,18 +1,19 @@
-package service.impl;
+package com.service.impl;
 
-import dao.UserBase;
-import model.UserBaseDO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dao.UserBase;
+import com.model.UserBaseDO;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import service.UserBaseService;
+import com.service.UserBaseService;
+
+import javax.annotation.Resource;
 
 /**
  * Created by htt on 2015/12/23.
  */
 @Service
 public class UserBaseServiceImpl implements UserBaseService{
-    @Autowired
+    @Resource
     UserBase userBase;
     public Boolean regeist(UserBaseDO userBaseDO) {
         if (StringUtils.isEmpty(userBaseDO.getUserId())

@@ -1,6 +1,6 @@
-package service;
+package com.service;
 
-import model.UserBaseDO;
+import com.model.UserBaseDO;
 
 /**
  * Created by htt on 2015/12/23.

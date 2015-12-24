@@ -1,4 +1,4 @@
-package controller;
+package com.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;

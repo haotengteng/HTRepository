@@ -1,4 +1,4 @@
-package model;
+package com.model;
 
 /**
  * Created by htt on 2015/12/23.

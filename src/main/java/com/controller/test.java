@@ -1,4 +1,4 @@
-package controller;
+package com.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,13 +11,13 @@ import java.sql.Statement;
  */
 public class test {
     public static Connection getConnection(){
-        String driver="com.mysql.jdbc.Driver";   //»ñÈ¡mysqlÊý¾Ý¿âµÄÇý¶¯Àà
-        String url="jdbc:mysql://localhost:3306/test"; //Á¬½ÓÊý¾Ý¿â£¨kucunÊÇÊý¾Ý¿âÃû£©
-        String name="root";//Á¬½ÓmysqlµÄÓÃ»§Ãû
-        String pwd=null;//Á¬½ÓmysqlµÄÃÜÂë
+        String driver="com.mysql.jdbc.Driver";   //ï¿½ï¿½È¡mysqlï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        String url="jdbc:mysql://localhost:3306/test"; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â£¨kucunï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
+        String name="root";//ï¿½ï¿½ï¿½ï¿½mysqlï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+        String pwd="123456";//ï¿½ï¿½ï¿½ï¿½mysqlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         try{
             Class.forName(driver);
-            Connection conn=DriverManager.getConnection(url,name,pwd);//»ñÈ¡Á¬½Ó¶ÔÏó
+            Connection conn=DriverManager.getConnection(url,name,pwd);//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½
             return conn;
         }catch(ClassNotFoundException e){
             e.printStackTrace();
@@ -61,7 +61,7 @@ public class test {
 
             System.out.println("Succeeded connecting to the Database!");
         Statement statement = cc.createStatement();
-        String sql = "select * from test2";
+        String sql = "select * from user_test";
         ResultSet rs = statement.executeQuery(sql);
         while(rs.next()) {
             System.out.println(rs.getString("id")+"");

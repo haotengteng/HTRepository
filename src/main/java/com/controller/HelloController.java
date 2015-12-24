@@ -1,11 +1,11 @@
-package controller;
+package com.controller;
 
-import model.UserBaseDO;
+import com.model.UserBaseDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import service.UserBaseService;
+import com.service.UserBaseService;
 
 import java.util.UUID;
 
@@ -26,9 +26,9 @@ public class HelloController {
         userBaseDO.setUserName(userName);
         userBaseDO.setPassword(password);
         if (userBaseService.regeist(userBaseDO)){
-            return "×¢²á³É¹¦";
+            return "seccess";
         }
-        throw new Exception("×¢²áÊ§°Ü");
+        throw new Exception("defult");
     }
 
 }
