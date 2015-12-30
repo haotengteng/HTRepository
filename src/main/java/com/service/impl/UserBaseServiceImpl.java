@@ -26,4 +26,11 @@ public class UserBaseServiceImpl implements UserBaseService{
         }
         return  userBaseDao.addUser(userBaseDO)>0;
     }
+
+    public UserBaseDO findByPhone(String phone) {
+        if (phone==null){
+            return null;
+        }
+        return userBaseDao.findByPhone(phone);
+    }
 }

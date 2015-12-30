@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
  */
 public interface UserBaseDao {
     int addUser(UserBaseDO userBaseDO);
+    UserBaseDO findByPhone(String phone);
 }

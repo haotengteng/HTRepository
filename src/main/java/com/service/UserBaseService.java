@@ -7,4 +7,5 @@ import com.model.UserBaseDO;
  */
 public interface  UserBaseService {
     Boolean regeist(UserBaseDO userBaseDO);
+    UserBaseDO findByPhone(String phone);
 }

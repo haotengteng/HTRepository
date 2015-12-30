@@ -1,17 +1,17 @@
 package com.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by htt on 2015/12/23.
+ * Created by htt on 2015/12/28.
  */
-public class UserBaseDO implements Serializable {
+public class TokenDO {
+    public String tokenId;
     public String userId;
     public String userName;
-    public String password;
+    public String uri;
     public Date registerTime;
+
 
     public Date getRegisterTime() {
         return registerTime;
@@ -21,15 +21,13 @@ public class UserBaseDO implements Serializable {
         this.registerTime = registerTime;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTokenId() {
+        return tokenId;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
-
-    public String phone;
 
     public String getUserId() {
         return userId;
@@ -47,11 +45,16 @@ public class UserBaseDO implements Serializable {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUri() {
+        return uri;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+
+    public Long getLongDate(){
+       return getRegisterTime().getTime();
     }
 }
