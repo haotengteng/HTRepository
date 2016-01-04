@@ -5,10 +5,11 @@ import com.model.UserBaseDO;
 import com.service.TokenService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.service.UserBaseService;
+
+import org.json.JSONObject;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -23,6 +24,7 @@ import java.util.UUID;
  * Created by htt on 2015/12/19.
  */
 @Controller
+@ResponseBody
 public class RegisterController {
     Logger logger = Logger.getLogger(RegisterController.class);
 
@@ -31,9 +33,8 @@ public class RegisterController {
     @Autowired
     TokenService tokenService;
 
-    @ResponseBody
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String sayHello(@FormParam("userName") String userName,@FormParam("password") String password,
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String sayHello(@FormParam("userName") String userName, @FormParam("password") String password,
                            @FormParam("phone") String phone) throws Exception {
         UUID uuid = UUID.randomUUID();
         UserBaseDO userBaseDO = new UserBaseDO();
@@ -47,13 +48,13 @@ public class RegisterController {
         throw new Exception("default");
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public void login(@RequestParam(required = true) String phone, @RequestParam String password,
-                      ServletRequest request, ServletResponse response){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@RequestParam(required = true) String phone, @RequestParam String password,
+                        ServletRequest request, ServletResponse response) {
         try {
             UserBaseDO userBaseDO = userBaseService.findByPhone(phone);
             if (userBaseDO != null) {
-                if (userBaseDO.equals(password)) {
+                if (userBaseDO.getPassword().equals(password)) {
                     TokenDO tokenDO = new TokenDO();
                     tokenDO.setUserName(userBaseDO.getUserName());
                     tokenDO.setUserId(userBaseDO.getUserName());
@@ -66,16 +67,25 @@ public class RegisterController {
                     Cookie cookie = new Cookie("tokenId", tokenId);
                     HttpServletResponse httpServletResponse = (HttpServletResponse) response;
                     httpServletResponse.addCookie(cookie);
+                    JSONObject jsonObject = new JSONObject(userBaseDO);
+                    return jsonObject.toString();
+                } else {
+                    return "login fail";
                 }
+            } else {
+                return "login fail";
             }
-        }catch (Exception e){
-               e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "login fail";
         }
+
     }
+
     @RequestMapping
     @ResponseBody
     public String index(@CookieParam("tokenId") String token) throws Exception {
-       TokenDO tokenDO =  tokenService.findTokenById(token);
+        TokenDO tokenDO = tokenService.findTokenById(token);
         return tokenDO.getUserName();
     }
 }

@@ -9,7 +9,7 @@
     user_test(userId,userName,password,phone,registerTime)
     VALUES (#{userId},#{userName},#{password},#{phone},sysdate())
     </insert>
-    <select id="findByPhone" parameterType="string">
+    <select id="findByPhone" parameterType="string" resultType="com.model.UserBaseDO">
      SELECT  <include refid="baseSql"/> FROM user_test WHERE phone=#{phone}
     </select>
 </mapper>

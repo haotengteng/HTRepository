@@ -16,4 +16,12 @@
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+    <!--<filter>-->
+        <!--<filter-name>auth-filter</filter-name>-->
+        <!--<filter-class>com.filter.AuthFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>auth-filter</filter-name>-->
+        <!--<servlet-name>springmvc</servlet-name>-->
+    <!--</filter-mapping>-->
 </web-app>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by htt on 2015/12/23.
  */
+@Repository
 public interface UserBaseDao {
     int addUser(UserBaseDO userBaseDO);
     UserBaseDO findByPhone(String phone);

@@ -1,12 +1,13 @@
 package com.filter;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
  * Created by htt on 2015/12/21.
  */
-public class logFilter implements Filter {
+public class LogFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
 System.out.print("234567890");
     }
@@ -16,7 +17,10 @@ System.out.print("234567890");
         String host = servletRequest.getRemoteHost();
         int localPort = servletRequest.getLocalPort();
         int remotePort = servletRequest.getRemotePort();
+        HttpServletRequest httpServletRequest =  (HttpServletRequest)servletRequest;
+        httpServletRequest.getRequestURL();
         System.out.println("addr:"+addr+";"+"host:"+host+";"+"localPort:"+localPort+";remotePort:"+remotePort);
+
     filterChain.doFilter(servletRequest,servletResponse);
     }
 
