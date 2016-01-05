@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+    <rabbit:connection-factory id="connectionFactory"
+                               host="localhost"
+                               username="guest"
+                               password="guest"
+                               port="5672"  />
+    <rabbit:template id="amqpTemplate"
+                     connection-factory="connectionFactory"
+                     exchange="logMqSenderExchange"
+                     routing-key="logMqSender-routing-key"
+                     queue="logMqSender"/>
+    <bean class="com.tool.MQLogSender">
+        <property name="rabbitTemplate" ref="amqpTemplate"/>
+    </bean>
+    <rabbit:admin connection-factory="connectionFactory"/>
+    <rabbit:queue name="logMqSender" />
+    <!--<rabbit:topic-exchange name="logMqSenderExchange">-->
+        <!--<rabbit:bindings>-->
+            <!--<rabbit:binding queue="logMqSender" pattern="logMqSender-routing-key" />-->
+        <!--</rabbit:bindings>-->
+    <!--</rabbit:topic-exchange>-->
+    <bean id="messageConverter"
+          class="org.springframework.amqp.support.converter.SimpleMessageConverter">
+    </bean>
+    <rabbit:listener-container connection-factory="connectionFactory" message-converter="messageConverter">
+        <rabbit:listener ref="consumeMessage" method="listen" queue-names="logMqSender"/>
+    </rabbit:listener-container>
+    <bean id="consumeMessage" class="com.tool.MQLogHandler" />
+
+</beans>

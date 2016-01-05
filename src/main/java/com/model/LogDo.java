@@ -1,9 +1,11 @@
 package com.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/1/4.
  */
-public class LogDo {
+public class LogDo implements Serializable{
     public String logId;
     public String userId;
     public String uri;

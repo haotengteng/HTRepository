@@ -1,8 +1,10 @@
 package com.controller;
 
+import com.model.LogDo;
 import com.model.TokenDO;
 import com.model.UserBaseDO;
 import com.service.TokenService;
+import com.tool.MQLogSender;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,8 @@ public class RegisterController {
     UserBaseService userBaseService;
     @Autowired
     TokenService tokenService;
+    @Autowired
+    MQLogSender sender;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String sayHello(@FormParam("userName") String userName, @FormParam("password") String password,
@@ -64,10 +68,17 @@ public class RegisterController {
                     if (null == tokenId) {
                         throw new Exception("生成token失败");
                     }
+                    //设置令牌
                     Cookie cookie = new Cookie("tokenId", tokenId);
                     HttpServletResponse httpServletResponse = (HttpServletResponse) response;
                     httpServletResponse.addCookie(cookie);
+                    //登录后将数据返回
                     JSONObject jsonObject = new JSONObject(userBaseDO);
+                    //将登录日志MQ发送到DB
+                    LogDo logDo = new LogDo();
+                    logDo.setUserId(userBaseDO.getUserId());
+                    logDo.setUri(httpServletRequest.getRequestURI());
+                    sender.sender(logDo);
                     return jsonObject.toString();
                 } else {
                     return "login fail";
