@@ -5,6 +5,7 @@ import com.model.TokenDO;
 import com.model.UserBaseDO;
 import com.service.TokenService;
 import com.tool.MQLogSender;
+import com.tool.RedisCacheUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,6 @@ public class RegisterController {
     TokenService tokenService;
     @Autowired
     MQLogSender sender;
-
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String sayHello(@FormParam("userName") String userName, @FormParam("password") String password,
                            @FormParam("phone") String phone) throws Exception {
@@ -67,7 +67,8 @@ public class RegisterController {
                     String tokenId = tokenService.addTokenDO(tokenDO);
                     if (null == tokenId) {
                         throw new Exception("生成token失败");
-                    }
+                    };
+
                     //设置令牌
                     Cookie cookie = new Cookie("tokenId", tokenId);
                     HttpServletResponse httpServletResponse = (HttpServletResponse) response;
@@ -93,10 +94,10 @@ public class RegisterController {
 
     }
 
-    @RequestMapping
-    @ResponseBody
-    public String index(@CookieParam("tokenId") String token) throws Exception {
+    @RequestMapping(value = "/token",method = RequestMethod.GET)
+    public String index(@CookieValue("tokenId") String token) throws Exception {
         TokenDO tokenDO = tokenService.findTokenById(token);
-        return tokenDO.getUserName();
+        JSONObject jsonObject = new JSONObject(tokenDO);
+        return jsonObject.toString();
     }
 }

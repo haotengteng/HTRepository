@@ -35,12 +35,12 @@ public class MQLogHandler {
         if (object instanceof LogDo) {
             try {
                 LogDo logDo = (LogDo) object;
-        logService.insertLog(logDo);
-            }catch (Exception e){
-             logger.error("MQ消息处理异常："+e);
+                logService.insertLog(logDo);
+            } catch (Exception e) {
+                logger.error("MQ消息处理异常：" + e);
             }
-        }else {
-            logger.error("MQ消息处理异常："+ new JSONObject(object).toString());
+        } else {
+            logger.error("MQ消息处理异常：" + new JSONObject(object).toString());
         }
     }
 }

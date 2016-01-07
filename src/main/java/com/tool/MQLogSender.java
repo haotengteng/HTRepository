@@ -1,7 +1,6 @@
 package com.tool;
 
 import com.model.LogDo;
-import org.json.JSONObject;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 /**
@@ -16,6 +15,7 @@ public class MQLogSender {
 //        rabbitTemplate.convertAndSend(json.toString());
         rabbitTemplate.convertAndSend(logDo);
     }
+
     public RabbitTemplate getRabbitTemplate() {
         return rabbitTemplate;
     }

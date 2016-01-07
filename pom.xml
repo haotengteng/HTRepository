@@ -10,6 +10,7 @@
     <properties>
         <!-- spring rabbit lib -->
         <spring.rabbit.version>1.1.4.RELEASE</spring.rabbit.version>
+        <hessian.version>4.0.38</hessian.version>
     </properties>
     <dependencies>
         <dependency>
@@ -156,8 +157,24 @@
             <artifactId>spring-rabbit</artifactId>
             <version>${spring.rabbit.version}</version>
         </dependency>
+        <!-- spring  redis-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.0.2.RELEASE</version>
+        </dependency>
+        <!-- 序列化类 -->
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>${hessian.version}</version>
+        </dependency>
     </dependencies>
-
     <build>
         <resources>
             <resource>

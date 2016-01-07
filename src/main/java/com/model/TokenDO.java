@@ -1,11 +1,12 @@
 package com.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by htt on 2015/12/28.
  */
-public class TokenDO {
+public class TokenDO implements Serializable{
     public String tokenId;
     public String userId;
     public String userName;
