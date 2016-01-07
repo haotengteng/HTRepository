@@ -1,6 +1,8 @@
 package com.tool;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 import redis.clients.util.SafeEncoder;
@@ -8,6 +10,7 @@ import redis.clients.util.SafeEncoder;
 /**
  * Created by Administrator on 2016/1/6.
  */
+@Component
 public class RedisCacheUtil {
     @Autowired
     ShardedJedisPool shardedJedisPool;
@@ -30,6 +33,15 @@ public class RedisCacheUtil {
             e.printStackTrace();
         }
         return "OK".equals(result) ? true : false;
+    }
+    public <T> boolean setEx(String key,int second,T value)  {
+        String result="";
+        try {
+            result = getCacheClient().setex(SafeEncoder.encode(key),second,getSerilizer().serialize(value));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "OK".equals(result)?true:false;
     }
 
     public <T> T get(String key, Class<T> t) {

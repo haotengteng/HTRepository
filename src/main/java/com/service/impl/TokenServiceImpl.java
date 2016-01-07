@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import com.commonHandler.defineException.CacheException;
 import com.dao.TokenDao;
 import com.model.TokenDO;
 import com.service.TokenService;
@@ -23,7 +24,7 @@ public class TokenServiceImpl implements TokenService {
 
     Logger logger = Logger.getLogger(TokenServiceImpl.class);
 
-    public String addTokenDO(TokenDO tokenDO) {
+    public String addTokenDO(TokenDO tokenDO) throws CacheException {
         if (tokenDO == null) {
             tokenDO = new TokenDO();
         }
@@ -31,8 +32,9 @@ public class TokenServiceImpl implements TokenService {
         tokenDO.setTokenId(tokernId);
         tokenDO.setRegisterTime(new Date());
         tokenDao.addToken(tokenDO);
-        if (!redisCacheUtil.set(tokernId, tokenDO)) {
+        if (!redisCacheUtil.setEx(tokernId, 3600, tokenDO)) {
             logger.error("tokenID添加到缓存失败");
+            throw new CacheException("tokenID添加到缓存失败");
         }
         return tokernId;
     }

@@ -10,7 +10,7 @@ public class TokenDO implements Serializable{
     public String tokenId;
     public String userId;
     public String userName;
-    public String uri;
+    public String phone;
     public Date registerTime;
 
 
@@ -46,12 +46,12 @@ public class TokenDO implements Serializable{
         this.userName = userName;
     }
 
-    public String getUri() {
-        return uri;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
 
