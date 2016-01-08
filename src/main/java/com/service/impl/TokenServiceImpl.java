@@ -15,7 +15,6 @@ import java.util.UUID;
 /**
  * Created by htt on 2015/12/28.
  */
-@Service
 public class TokenServiceImpl implements TokenService {
     @Autowired
     TokenDao tokenDao;
@@ -31,7 +30,6 @@ public class TokenServiceImpl implements TokenService {
         String tokernId = UUID.randomUUID().toString();
         tokenDO.setTokenId(tokernId);
         tokenDO.setRegisterTime(new Date());
-        tokenDao.addToken(tokenDO);
         if (!redisCacheUtil.setEx(tokernId, 3600, tokenDO)) {
             logger.error("tokenID添加到缓存失败");
             throw new CacheException("tokenID添加到缓存失败");

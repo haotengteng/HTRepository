@@ -2,10 +2,10 @@ package com.tool;
 
 import com.model.LogDo;
 import com.service.LogService;
+import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
 
 /**
  * Created by Administrator on 2016/1/5.
@@ -41,7 +41,7 @@ public class MQLogHandler {
                 logger.error("MQ消息处理异常：" + e);
             }
         } else {
-            logger.error("MQ消息处理异常：" + new JSONObject(object).toString());
+            logger.error("MQ消息处理异常：" + new JSONObject().fromObject(object).toString());
         }
     }
 }

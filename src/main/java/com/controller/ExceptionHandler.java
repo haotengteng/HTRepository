@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.commonHandler.defineException.CacheException;
+import com.tool.JsonUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,10 +14,10 @@ public class ExceptionHandler {
 
      @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
     public String handlerExceptor(Exception e){
-       return e.getMessage();
+       return JsonUtil.getJson(e.getMessage());
    }
     @org.springframework.web.bind.annotation.ExceptionHandler(CacheException.class)
     public String CacheExceptionHandler(CacheException e){
-        return e.getMessage();
+        return JsonUtil.getJson(e.getMessage());
     }
 }

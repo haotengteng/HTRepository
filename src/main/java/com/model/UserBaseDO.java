@@ -11,15 +11,8 @@ public class UserBaseDO implements Serializable {
     public String userId;
     public String userName;
     public String password;
+    public String phone;
     public Date registerTime;
-
-    public Date getRegisterTime() {
-        return registerTime;
-    }
-
-    public void setRegisterTime(Date registerTime) {
-        this.registerTime = registerTime;
-    }
 
     public String getPhone() {
         return phone;
@@ -28,8 +21,6 @@ public class UserBaseDO implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    public String phone;
 
     public String getUserId() {
         return userId;
@@ -53,5 +44,13 @@ public class UserBaseDO implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
     }
 }

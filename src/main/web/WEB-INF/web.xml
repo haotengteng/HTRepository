@@ -10,18 +10,18 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath*:applicationContext*.xml</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    <!--<filter>-->
-        <!--<filter-name>auth-filter</filter-name>-->
-        <!--<filter-class>com.filter.AuthFilter</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-        <!--<filter-name>auth-filter</filter-name>-->
-        <!--<servlet-name>springmvc</servlet-name>-->
-    <!--</filter-mapping>-->
+    <filter>
+        <filter-name>login-filter</filter-name>
+        <filter-class>com.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>login-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
