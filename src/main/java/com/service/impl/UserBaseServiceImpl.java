@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import com.service.UserBaseService;
+import redis.clients.util.SafeEncoder;
 
 import javax.annotation.Resource;
 
@@ -21,9 +22,11 @@ public class UserBaseServiceImpl implements UserBaseService{
     public Boolean regeist(UserBaseDO userBaseDO) {
         if (StringUtils.isEmpty(userBaseDO.getUserId())
                 ||StringUtils.isEmpty(userBaseDO.getUserName())
-                ||StringUtils.isEmpty(userBaseDO.getUserId())){
+                ||StringUtils.isEmpty(userBaseDO.getUserId())
+                ||StringUtils.isEmpty(userBaseDO.getPassword())){
             return false;
         }
+        userBaseDO.setPassword(SafeEncoder.encode(userBaseDO.getPassword()).toString());
         return  userBaseDao.addUser(userBaseDO)>0;
     }
 

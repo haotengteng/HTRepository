@@ -2,7 +2,6 @@ package com.service.impl;
 
 import com.dao.LogDao;
 import com.model.LogDo;
-import com.mysql.jdbc.log.Log;
 import com.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -5,6 +5,7 @@ import com.service.LogService;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Administrator on 2016/1/5.

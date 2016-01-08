@@ -1,6 +1,7 @@
 package com.service;
 
 import com.model.LogDo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
