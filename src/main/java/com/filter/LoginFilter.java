@@ -24,27 +24,31 @@ public class LoginFilter implements Filter {
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         Map<String, String> map = null;
         if (httpServletRequest.getCookies() != null) {
             map = Cookiehandler.cookieHandle(httpServletRequest.getCookies());
-        }
-        if (map != null) {
-            if (ApiProvider.tokenService.findTokenById(map.get("tokenId")) != null) {
-                filterChain.doFilter(servletRequest, servletResponse);
+            if (map != null) {
+                if (ApiProvider.tokenService.findTokenById(map.get("tokenId")) != null) {
+                    filterChain.doFilter(servletRequest, servletResponse);
+                } else {
+                    OutputStream outputStream = servletResponse.getOutputStream();
+                    outputStream.write("请登录。。。".getBytes("UTF-8"));
+                }
+            } else {
+                OutputStream outputStream = servletResponse.getOutputStream();
+                outputStream.write("请登录。。。".getBytes("UTF-8"));
             }
-        }
-        if ("/account/login".equals(httpServletRequest.getRequestURI())
+        } else if ("/account/login".equals(httpServletRequest.getRequestURI())
                 || "/account/register".equals(httpServletRequest.getRequestURI())) {
-            HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-            OutputStream stream = httpServletResponse.getOutputStream();
-            stream.write("你好".getBytes("UTF-8"));
-            System.out.println("ni");
-            //filterChain.doFilter(servletRequest, httpServletResponse);
+
+            filterChain.doFilter(servletRequest, httpServletResponse);
+        } else {
+            //如何在过滤器中被拦截后返回拦截原因
+            OutputStream outputStream = servletResponse.getOutputStream();
+            outputStream.write("请登录。。。".getBytes("UTF-8"));
         }
-
-        //如何在过滤器中被拦截后返回拦截原因
     }
-
     public void destroy() {
 
     }
